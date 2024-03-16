@@ -4,34 +4,6 @@ from bs4 import BeautifulSoup
 def free_servers():
     print("Starting...")
 
-    # URL страницы со списком новых серверов Minecraft на monitoringminecraft.ru
-    url = "https://monitoringminecraft.ru/novie-servera"
-    try:
-        # Отправляем GET запрос на страницу
-        response = requests.get(url)
-
-        # Проверяем успешность запроса
-        if response.status_code == 200:
-            # Используем BeautifulSoup для парсинга HTML
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            # Находим все элементы с классом "ip_serv", которые содержат IP-адреса серверов
-            ip_elements = soup.find_all(class_="ip_serv")
-            
-            # Выводим IP-адреса серверов
-            print("Список серверов на monitoringminecraft.ru:")
-            for ip_element in ip_elements:
-                ip_address = ip_element.text.strip()
-                print(ip_address)
-                with open("done_filter.txt", "a") as file:
-                    file.write(ip_address + "\n")
-            print("Окей, перехожу к следующему мониторингу")
-            
-        else:
-            print("Произошла ошибка при получении страницы", url)
-    except Exception as e:
-        print("Произошла ошибка:", e)
-
     ########################################################################
     # URL страницы со списком новых серверов Minecraft на minecraftrating.ru
     url2 = "https://minecraftrating.ru/new-servers/"
